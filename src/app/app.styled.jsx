@@ -61,7 +61,7 @@ export const RightPannel = styled.div`
         align-items:center;
         padding:50px 0 30px 0;
         .bread-crumbs{
-            grid-column:1/4;
+            grid-column:1/9;
         }
         .search{
             grid-column:9/12;

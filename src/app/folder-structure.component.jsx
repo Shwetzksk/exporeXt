@@ -4,7 +4,7 @@ import Folder from '../components/folder/folder.component';
 import { useStore } from '../context/index.contex';
 
 const Container = styled.div`
-    margin:0 40px;
+    margin:0 30px;
 `
 
 
