@@ -37,14 +37,13 @@ export const LeftPannel = styled.div`
         grid-row:1/3;
     }
     div{
-        grid-row:3/12;
+        grid-row:3/11;
     }
     button{
         cursor: pointer;
-        grid-row:12/13;
+        grid-row:11/13;
         width:100%;
-        font-size:1.1rem;
-        margin:10px 0;
+        margin:auto 0 10px 0;
     }
 `;
 export const RightPannel = styled.div`

@@ -9,12 +9,12 @@ const Container = styled.div`
 
 
 function Holder() {
-    const { folder} = useStore();
+    const { folderBranch} = useStore();
     return (
         <Container>
-            <Folder data={folder}>
+            {folderBranch.map(folder=><Folder data={folder}>
                 <Folder/>
-            </Folder>
+            </Folder>)}
         </Container>
     )
 }

@@ -3,11 +3,14 @@ import Btn from '../components/button/button.component';
 import AllPopups from '../components/popups/all-popups.component';
 import FolderStructure from './folder-structure.component';
 import Breadcrumb from './bread-crumbs.component';
+import ShowFolder from './show-inside-folder.component';
 import Search from './search.component';
 import CreateBtn from './create-btn.component';
 import logo from '../assets/logo.png';
 import Storage from '../context/index.contex';
+
 function App() {
+
   return (
     <Storage>
       <Container >
@@ -21,7 +24,7 @@ function App() {
                   <p>ExploreXT</p>
             </Header> 
           <FolderStructure className="folder-structure" />
-          <Btn>Lock</Btn>
+          <Btn >Lock</Btn>
         </LeftPannel>
         <RightPannel>
           <header className="header">
@@ -29,7 +32,8 @@ function App() {
             <Search />
             <CreateBtn/>
           </header>
-          <hr/>
+          <hr />
+          <ShowFolder/>
         </RightPannel>
       </Container>
     </Storage>

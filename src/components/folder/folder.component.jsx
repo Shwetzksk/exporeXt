@@ -5,7 +5,7 @@ import folderopen from '../../assets/folder-open.png';
 import { useStore } from '../../context/index.contex';
 const Container = styled.div`
     margin:5px 0;
-    width:1005;
+    width:100%;
 `;
 const FolderBar = styled.div`
     background-color:${props=>props.expand?'var(--darkgray)':'var(--primary)'};
@@ -34,40 +34,36 @@ const SubContainer = styled.div`
 
 function Folder(props) {
     const [expand, setExpand] = useState(false);
-    const {addBreadCrumbs,breadcrumbs,removeBreadCrumbs} = useStore();
-    const { name, docs } = props.data;
+    const {addBreadCrumbs,breadcrumbs,removeBreadCrumbs,addActiveFolder} = useStore();
+    const { name, docs,type } = props?.data;
     function setActiveFolder() {
+        
         if(!expand){
             addBreadCrumbs(name);
+            
         } else {
-            removeBreadCrumbs()
+            removeBreadCrumbs()           
         }
-        console.log('breads', breadcrumbs);
+        addActiveFolder(props.data);
+        
     }
     return (
-        <Container >
-            <FolderBar  onClick={(e) => { setExpand(!expand);setActiveFolder(e)}} expand={expand}>
-                {!expand && <img src={folderclose} alt="folder" />}
-                {expand && <img src={folderopen} alt="folder" />}
-                <p>{ name}</p>
-            </FolderBar>
-            {docs.length >0 && <SubContainer expand={expand}>
-                {docs.map((doc) => <Folder data={doc} />)}
-            </SubContainer>}
-        </Container>
+        <>
+
+            {type==='folder'&&<Container >
+                <FolderBar  onClick={(e) => { setExpand(!expand);setActiveFolder(e)}} expand={expand}>
+                    {!expand && <img src={folderclose} alt="folder" />}
+                    {expand && <img src={folderopen} alt="folder" />}
+                    <p>{ name}</p>
+                </FolderBar>
+                
+                {type==='folder'&&docs.length >0 && <SubContainer expand={expand}>
+                    {docs.map((doc) => <Folder data={doc} />)}
+                </SubContainer>}
+            </Container>}
+        </>
     )
 }
 
-function Bar(props) {
-    const [expand, setExpand] = useState(false);
-    const { data } = props;
-    return (
-        <FolderBar onClick={()=>{setExpand(!expand)}} expand={expand}>
-            {!expand && <img src={folderclose} alt="folder" />}
-            {expand && <img src={folderopen} alt="folder" />}
-            <p>{ data.name}</p>
-        </FolderBar>
-    )
-}
 
 export default Folder

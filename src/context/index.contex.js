@@ -7,7 +7,10 @@ export const useStore = function () {
 
 function Storage(props) {
     const [createPopup, setCreatePopup] = useState({ file: false, folder: false });
-    const [folder, setFolder] = useState({ name: '', type: '', docs: [], parent: null });
+    const folders = { Instrument: { name: 'Instrument', type: 'folder', docs:[]}};
+    const [lock, setLock] = useState(false);
+    const [folderBranch, setFolderBranch] = useState([{name:'Instruments',type:'folder',docs:[{name:'Fender',type:'folder',docs:[{name:'Electric Guitar',type:'folder',docs:[]},{name:'Accoustic',type:'folder',docs:[]}]},{name:'White',type:'file',data:''}]}]);
+    const [activeFolder, setActiveFolder] = useState({docs:[]});
     const [breadcrumbs,setBreadcrumbs] = useState([]);
     
     function createFolder() {
@@ -22,6 +25,12 @@ function Storage(props) {
         console.log('CLOSED_FOLDER/FILE_CREATE_POPUP');
         setCreatePopup({file:false,folder:false})
     }
+    function openLock() {
+        setLock(true);
+    }
+    function closeLock() {
+       setLock(false); 
+    }
     function addBreadCrumbs(bread) {
         setBreadcrumbs(prevValue=>[...prevValue,bread]);
     }
@@ -32,54 +41,48 @@ function Storage(props) {
         });
     }
 
+    function addActiveFolder(data) {
+        setActiveFolder(data);
+    }
+
+    function createNewFolder(data) {
+        if (!breadcrumbs.length) {
+            folders[data.name]={name:data.name,type:'folder',docs:[]}
+            setFolderBranch(prevValue=>[...prevValue,{name:data.name,type:'type',docs:[]}])
+        } else {
+            if(breadcrumbs)
+            setFolderBranch(prevValue=>[...prevValue,{name:data.name,type:'type',docs:[]}])
+        }
+
+    }
+
+    function searchFoldername(name) {
+        
+    }
+
     const value = {
         popups: {
             create: {
                 ...createPopup,
-                createFolder,
-                createFile,
+                newFolder:createFolder,
+                newFile:createFile,
                 doneCreating: closeCreatePopup,
                 close:closeCreatePopup
-            },         
+            },
+            lock: {
+                status: lock,
+                openLock,
+                closeLock,
+            }
         },
-        folder: {
-            name: 'Instrument',
-            type: 'folder',
-            docs: [
-                {
-                    name: 'Fender',
-                    type: 'folder',
-                    docs: [
-                        {
-                            name: 'Acoustic',
-                            type: 'folder',
-                            docs: [],
-                            parent: 'Fender',
-                        }
-                    ],
-                    parent: 'Instrument',
-                },
-                {
-                    name: 'Yamaha',
-                    type: 'folder',
-                    docs: [
-                        {
-                            name: 'Acoustic',
-                            type: 'folder',
-                            docs: [],
-                            parent: 'Yamaha',
-                        }
-                    ],
-                    parent: 'Instrument',
-                }
-            ],
-            parent: null,
-            
-        },
-        activeFolder: {},
+        folders,
+        folderBranch,
+        createNewFolder,
+        activeFolder,
+        addActiveFolder,
         breadcrumbs,
         addBreadCrumbs,
-        removeBreadCrumbs
+        removeBreadCrumbs,
         
     };
     return (

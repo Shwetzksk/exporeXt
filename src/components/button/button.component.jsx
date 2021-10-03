@@ -8,6 +8,7 @@ const Btn = styled.button`
     margin:auto 0;
     padding:10px 20px;
     font-size:1.1rem;
+    text-align:center;
     
 `;
 
