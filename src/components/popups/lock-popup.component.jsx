@@ -31,16 +31,26 @@ const Card = styled.div`
             width:50px;
             height:50px;
         }
+        
         form{
+            display:flex;
             margin:0 15px;
-            border:1px solid var(--darkgray);
-            padding:10px;
             border-radius:10px;
+            .pin-box{
+                border:1px solid var(--darkgray);
+                width:40px;
+                height:40px;
+                display:flex;
+                margin:0 5px;
+                border-radius:5px;
+            }
             input{
+                width:100%;
                 font-size:1rem;
                 color:var(--white);
                 background:transparent;
                 border:0;
+                text-align:center;
                 :focus{
                     outline:none;
                     
@@ -59,23 +69,33 @@ const Card = styled.div`
 
 function Popup() {
     const { popups } = useStore();
-    const { close } = popups.create;
+    const { closeLock } = popups.lock;
     function closePopup(e) {
         const id = e.target.id;
-        if (id === 'create-folder-bg') {
-            close();
+        if (id === 'lock-bg') {
+            closeLock();
         }
     }
     return (
-        <Container id="create-folder-bg" onClick={closePopup}>
+        <Container id="lock-bg" onClick={closePopup}>
             <Card>
                 <div className="folder-input-container">
-                    <img src={ folder} alt="folder"/>
                     <form>
-                        <input placeholder="Enter folder name.."/>
+                        <div className="pin-box">
+                            <input maxLength="1" />
+                        </div>
+                        <div className="pin-box">
+                            <input maxLength="1" />
+                        </div>
+                        <div className="pin-box">
+                            <input maxLength="1" />
+                        </div>
+                        <div className="pin-box">
+                            <input maxLength="1" />
+                        </div>
                     </form>
                 </div>
-                <Btn>Create Folder</Btn>
+                <Btn>Set Lock</Btn>
             </Card>
         </Container>
     )

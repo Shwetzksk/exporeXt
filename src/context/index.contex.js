@@ -13,12 +13,10 @@ function Storage(props) {
     const [activeFolder, setActiveFolder] = useState({docs:[]});
     const [breadcrumbs,setBreadcrumbs] = useState([]);
     
-    function createFolder() {
-        console.log('CREATE_FOLDER');
+    function opencreateFolder() {
         setCreatePopup({file:false,folder:true})
     }
-    function createFile() {
-        console.log('CREATE_FILE');
+    function opencreateFile() {
         setCreatePopup({file:true,folder:false})
     }
     function closeCreatePopup() {
@@ -64,8 +62,8 @@ function Storage(props) {
         popups: {
             create: {
                 ...createPopup,
-                newFolder:createFolder,
-                newFile:createFile,
+                opencreateFolder,
+                opencreateFile,
                 doneCreating: closeCreatePopup,
                 close:closeCreatePopup
             },

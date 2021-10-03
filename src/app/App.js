@@ -1,5 +1,5 @@
 import { GlobalStyle, Container, LeftPannel, RightPannel, Header } from './app.styled';
-import Btn from '../components/button/button.component';
+import LockBtn from './lock-btn.component';
 import AllPopups from '../components/popups/all-popups.component';
 import FolderStructure from './folder-structure.component';
 import Breadcrumb from './bread-crumbs.component';
@@ -24,7 +24,7 @@ function App() {
                   <p>ExploreXT</p>
             </Header> 
           <FolderStructure className="folder-structure" />
-          <Btn >Lock</Btn>
+          <LockBtn />
         </LeftPannel>
         <RightPannel>
           <header className="header">

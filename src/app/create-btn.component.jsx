@@ -52,16 +52,16 @@ const Options = styled.div`
 
 function Create() {
     const { popups } = useStore();
-    const { newFolder, newFile, } = popups;
+    const { opencreateFolder, opencreateFile, } = popups.create;
     const [options, setOptions] = useState(false);
     return (
         <Container className="create-btn">
             <button onClick={()=>{setOptions(!options)}}><i className="fas fa-plus"></i></button>
             <Options active={options} >
-                <div className="file" onClick={newFile}>
+                <div className="file" onClick={opencreateFile}>
                     <p>File</p>
                 </div>
-                <div className="folder" onClick={newFolder}>
+                <div className="folder" onClick={opencreateFolder}>
                     <p>Folder</p>
                 </div>
             </Options>
